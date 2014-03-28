@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="Ondestan">
+
+  <head>
+    <tal:block metal:define-slot="head"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="keywords" content="web python pyramid pylons cows gps monitoring sqlalchemy geoalchemy2" />
+    <meta name="description" content="cows position monitoring web app" />
+    <link rel="stylesheet"
+          href="${request.static_url('ondestan:static/bootstrap-3.1.1-dist/css/bootstrap.css')}"
+          type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet"
+          href="${request.static_url('ondestan:static/css/main.css')}"
+          type="text/css" media="screen" />
+    <tal:block metal:define-slot="styles"/>
+  </head>
+
+  <?python from ondestan.security import get_user_login ?>
+  <body tal:define="user_id get_user_login(request)">
+	
+	<div class="container">
+	    <div class="header">
+	      <ul tal:condition="user_id != None" class="nav navbar-nav pull-right">
+	        <li class="dropdown active">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user_id} <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="${request.route_url('update_profile')}" i18n:translate="update_profile">Update profile</a></li>
+	            <li><a href="${request.route_url('logout')}" i18n:translate="logout">Logout</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	      <h3 class="text-muted"><a href="${request.route_url('default')}">Onde Están</a></h3>
+	    </div>
+	    
+	    <tal:block metal:define-slot="content"/>
+    </div>
+    <div metal:define-slot="footer"></div>
+    <div>
+    	<script type="text/javascript" src="${request.static_url('ondestan:static/js/lib/jquery-1.8.2.min.js')}"></script>
+    	<script type="text/javascript" src="${request.static_url('ondestan:static/bootstrap-3.1.1-dist/js/bootstrap.js')}"></script>
+    	<tal:block metal:define-slot="javascript"/>
+    </div>
+  </body>
+
+</html>
