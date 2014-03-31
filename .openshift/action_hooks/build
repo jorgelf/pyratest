@@ -15,5 +15,11 @@ mv $OPENSHIFT_REPO_DIR/wsgi/$APP/$APP/static/* $OPENSHIFT_REPO_DIR/wsgi/static/
 
 cd $OPENSHIFT_REPO_DIR/wsgi/$APP
 
+sed -i 's/^db.host=.*/db.host='$OPENSHIFT_POSTGRESQL_DB_HOST'/' production.ini
+sed -i 's/^db.port=.*/db.port='$OPENSHIFT_POSTGRESQL_DB_PORT'/' production.ini
+sed -i 's/^db.dbname=.*/db.dbname='$OPENSHIFT_APP_NAME'/' production.ini
+sed -i 's/^db.user=.*/db.user='$OPENSHIFT_POSTGRESQL_DB_USERNAME'/' production.ini
+sed -i 's/^db.password=.*/db.password='$OPENSHIFT_POSTGRESQL_DB_PASSWORD'/' production.ini
+
 # We're not doing 'install' to save space.
 python setup.py develop
