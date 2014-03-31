@@ -27,7 +27,7 @@ class Db(object):
     session = None
 
     def __init__(self):
-        '''host = Config.get_string_value('db.host')
+        host = Config.get_string_value('db.host')
         port = Config.get_string_value('db.port')
         db = Config.get_string_value('db.dbname')
         user = Config.get_string_value('db.user')
@@ -46,7 +46,7 @@ class Db(object):
 
         ## Create all Tables
 
-        Base.metadata.create_all(self.engine)'''
+        Base.metadata.create_all(self.engine)
 
     def instance(self, *args, **kwargs):
 
